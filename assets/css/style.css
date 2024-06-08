@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.sony-bar a{
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.sony-bar {
+    background-color: black;
+    text-align: end;
+    padding: 5px;
+}
+
+
+.btn-w {
+    width: 90px;
+}
+
+.logo {
+    height: 20px;
+    /* background-color: aqua; */
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .search-section {
+    margin-left: 150px;
+} */
+
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* height: 100%; */
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 30px;
+    padding: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+    
+}
+
+.search-input {
+    width: 10px;
+    height: 30px;
+    padding: 5px;
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    transition: width 0.3s ease;
+    padding-left: 10px;
+    color: rgb(97, 125, 250);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+
+.search-input::placeholder {
+    color: transparent;
+}
+
+
+.search-input:focus::placeholder {
+    color: rgb(97, 125, 250);
+}
+
+
+.search-input:focus{
+    width: 150px;
+}
+
+.search-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 25px;
+    fill: rgb(97, 125, 250);
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 580px) {
+    .res-nav {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .pages {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        
+    }
+
+    .logo {
+        position: absolute;
+        right: 0;
+    }
+
+    .sign-in-container {
+        width: 100vw;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .search-container{
+        width: 100vw;
+    }
+
+    
+
+   
+  }
