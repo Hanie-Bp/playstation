@@ -122,7 +122,19 @@ body {
         width: 100vw;
     }
 
-    
-
-   
   }
+
+ 
+
+.width_1 {
+    max-width: 200px;
+}
+
+.z-index {
+    z-index: 999;
+}
+
+
+.height-img-hero {
+    height: 500px;
+}

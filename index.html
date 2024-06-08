@@ -10,7 +10,7 @@
 </head>
 <body>
   <div class="sony-bar w-100"><a href="https://www.sony.com/">SONY</a></div>
-    <header class="d-flex flex-column position-sticky top-0">
+    <header class="d-flex flex-column position-sticky top-0 z-index">
             <nav class="d-flex  justify-content-between p-1 res-nav   w-100 bg-white">
                 <section class="pages w-100 d-flex align-items-center">
                     <span class="logo">
@@ -65,7 +65,30 @@
     </header>
 
 
-    <main style="background-color: aqua; height: 10000px;">
+    <main>
+
+
+      <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+         
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+          <i class="fas fa-less-than fs-5 p-2 text-dark rounded-5 border border-dark"></i>
+          <span class="carousel-control-prev" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next text-center" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+          <i class="fas fa-greater-than fs-5 mt-3 p-2 text-dark rounded-5 border border-dark"></i>
+          <span class="carousel-control-next" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+        </div>
+
+
+
+
+
+
 
     </main>
 
@@ -75,6 +98,7 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="./assets/javascript/home.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="./assets/javascript/home.js"></script>
 </body>
 </html>
