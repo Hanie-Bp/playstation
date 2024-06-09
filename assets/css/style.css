@@ -135,6 +135,33 @@ body {
 }
 
 
-.height-img-hero {
-    height: 500px;
+.onee {
+    height: 80%;
 }
+
+.height-img-hero{
+    height: 550px;
+}
+
+.inner {
+    display: flex;
+    border: none;
+    flex-wrap: wrap;
+    width: 1000px;
+    margin: 0 auto;
+    gap: 3px;
+    /* border: 1px solid blue; */
+    justify-content: space-around;
+    margin-top: 30px;
+    
+
+}
+
+
+.inner img {
+    width: 150px;
+    height: 150px;
+    display: block;
+    border-radius: 20px;
+}
+

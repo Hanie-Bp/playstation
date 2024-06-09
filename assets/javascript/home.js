@@ -33,8 +33,6 @@ document.addEventListener('DOMContentLoaded',()=> {
 })
 //////////////////
 
-const carouselConttainer = document.querySelector('.carousel-inner');
-
 const apiKey = '6696da3ed4794d2dbcad58b3d495e0dd';
 const apiUrl = `https://api.rawg.io/api/games?key=${apiKey}&dates=2024-01-01,2024-12-31&ordering=-added&page_size=10`;
 const getData = async ()=> {
@@ -47,53 +45,57 @@ const getData = async ()=> {
 }
 
 
-const key = '6696da3ed4794d2dbcad58b3d495e0dd';
-const url = `https://api.rawg.io/api/games?key=${apiKey}&page_size=1&page=${Math.floor(Math.random() * 500) + 1}`;
-const getData1 = async ()=> {
-    try {
-        const response = await axios.get(url);
-        console.log( response.data.results[0]);
-        return response.data.results[0];
-    } catch (error) {
-        alert(error)
-    }
-}
-
-getData1().then((data)=> {
-        const genre = data.genres[0].name
-        const carouselItem = createElement('div',['carousel-item','one','active','w-100'])
-        carouselItem.innerHTML = `
-            <div class="d-flex align-items-center position-relative w-100">
-            <img src=${data.background_image}  class='height-img-hero w-100'></img>
-              <div class="container text-start p-5 w-50 text-hero text-white position-absolute">
-                <span class="text-capitalize mb-1 ps-2 fst-italic ">new release</span>
-                <h1 class="h1 fs-1 fw-bold text-uppercase pb-4 pt-4">${data.name}
-                </h1>
-                <p class="width_1 fw-semibold">${genre}</p>
-                <a href="#" class="btn btn-light" >More</a>
-              </div>
-            </div>`
-          carouselConttainer.append(carouselItem);
-})
-
-
-
-
+const carouselConttainer = selectedElement('.carousel-inner');
+const carouselIndicators = selectedElement('.inner');
+const newArr = []
 getData().then((datas)=> {
-    datas.forEach((data)=> {
-        const genre = data.genres[0].name
-        const carouselItem = createElement('div',['carousel-item','one','w-100'])
-        carouselItem.innerHTML = `
-            <div class=" d-flex align-items-center position-relative w-100">
-            <img src=${data.background_image} class='height-img-hero w-100'></img>
-              <div class="container text-start p-5 w-50 text-hero  text-white position-absolute">
-                <span class="text-capitalize mb-1 ps-2 fst-italic ">new release</span>
-                <h1 class="h1 fs-1 fw-bold text-uppercase pb-4 pt-4">${data.name}
-                </h1>
-                <p class="width_1 fw-semibold">${genre}</p>
-                <a href="#" class="btn btn-light" >More</a>
-              </div>
-            </div>`
-          carouselConttainer.append(carouselItem);
-    })
+    console.log(datas);
+    datas.forEach((data,i)=> {
+            newArr.push(data.background_image)
+            const genre = data.genres[0].name
+            const carouselItem = createElement('div',['carousel-item','item-large','one','w-100']);
+            carouselItem.innerHTML = `
+                <div class=" d-flex align-items-center position-relative w-100">
+                <img src=${data.background_image} class='height-img-hero w-100'></img>
+                  <div class="container text-start p-5 w-50 text-hero  text-white position-absolute">
+                    <span class="text-capitalize mb-1 ps-2 fst-italic ">new release</span>
+                    <h1 class="h1 fs-1 fw-bold text-uppercase pb-4 pt-4">${data.name}
+                    </h1>
+                    <p class="width_1 fw-semibold">${genre}</p>
+                    <a href="#" class="btn btn-light" >More</a>
+                  </div>
+                </div>`
+              carouselConttainer.append(carouselItem);
+
+
+              const buttonIndicator = createElement('button');
+              buttonIndicator.innerHTML = `<img src=${data.background_image} class='height-img-hero'>`
+              buttonIndicator.type = 'button'
+              buttonIndicator.style.border = 'none'
+              buttonIndicator.style.background = 'none'
+            //   buttonIndicator.classList.add('active');
+              buttonIndicator.setAttribute('data-bs-target','#carouselDemo');
+              buttonIndicator.setAttribute('data-bs-slide-to',`${i}`);
+              carouselIndicators.append(buttonIndicator)
+           
+    });
+
+   
+
+const items = document.querySelectorAll('.carousel-item');
+console.log(items);
+Array.from(items)[0].classList.add('active');
+const buttons = document.querySelectorAll('.inner button');
+// Array.from(buttons)[0].classList.add('active')
+// buttons.forEach((el)=> {
+//     if (el.classList.contains('active')) {
+//         console.log(el);
+//         el.style.border = '1px solid blue'
+//     }
+// })
+
 })
+       
+
+       
+
