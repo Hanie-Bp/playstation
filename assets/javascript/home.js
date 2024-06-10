@@ -107,7 +107,7 @@ async function getUpcomingGamesWithDetails(i) {
      
 }
 const items = document.querySelectorAll('.carousel-item');
-console.log(items);
+// console.log(items);
 Array.from(items)[0].classList.add('active');
 const buttons = document.querySelectorAll('.inner button');
   }
@@ -126,4 +126,135 @@ const buttons = document.querySelectorAll('.inner button');
 
 
 getUpcomingGamesWithDetails(0)
+//////////////////////////////////////////
+const cardContainer = document.querySelector('.section-cards-c');
+
+const create = async (games) => {
+  for (const game of games) {
+    const gameDetails = await fetchGameDetails(game.id);
+    // console.log(gameDetails);
+    // console.log(gameDetails);
+    const encodedGameName = encodeURIComponent(gameDetails.name);
+    const playstaionUrl = `https://www.google.com/search?q=${encodedGameName}+game`
+    const website = gameDetails.website ? gameDetails.website : playstaionUrl
+    const card = createElement('div',['d-flex','flex-wrap', 'border-none']);
+      card.innerHTML = `
+                <div class="card day border-none">
+                <div class="img-wrap">
+                  <img src=${gameDetails.background_image} class="card-img-top" alt="${gameDetails.name}"></div>
+                  <div class="card-body body-card text-white">
+                    <h5 class="card-title">${gameDetails.name}</h5>
+                    <a href=${website} class="btn a-link btn-light">More</a>
+                  </div>
+                </div>
+                `
+                cardContainer.append(card)
+   }
+}
+const handledays = async()=> {
+  try {
+    cardContainer.innerHTML =''
+    const games = await getRandomGames();
+    // console.log(games);
+    create(games)
+   
+  } catch (error) {
+    alert(error)
+  }
+}
+
+const hadleNewReleases =async ()=> {
+  try {
+    cardContainer.innerHTML = '';
+    const games = await getNewReleases();
+    console.log(games);
+    create(games)
+  
+  } catch (error) {
+    alert(error)
+  }
+}
+
+const handleComingSoon =async ()=> {
+  try {
+    cardContainer.innerHTML = '';
+    const games = await getComingSoonGames();
+    console.log(games);
+    create(games)
+  
+  } catch (error) {
+    alert(error)
+  }
+}
+
+const buttonsTabs = document.querySelectorAll('.pills button');
+buttonsTabs.forEach((button)=> {
+  if (button.classList.contains('days')) {
+    button.addEventListener('click',handledays);
+  }else if (button.classList.contains('new')) {
+    button.addEventListener('click',hadleNewReleases)
+  } else {
+    button.addEventListener('click',handleComingSoon)
+  }
+})
+
+
+const getComingSoonGames = async()=> {
+  try {
+    const response = await axios.get('https://api.rawg.io/api/games', {
+      params: {
+        key: apiKey,        
+        dates: '2024-06-11,2024-12-31', 
+        ordering: 'released', 
+        page_size: 8          
+      }
+    });
+    console.log(response.data.results);
+      return response.data.results
+  } catch (error) {
+    alert(error)
+  }
+}
+
+const getNewReleases = async()=> {
+  try {
+    const response = await axios.get('https://api.rawg.io/api/games', {
+      params: {
+        key: apiKey,       
+        dates: '2023-12-01,2024-06-10', 
+        ordering: '-released', 
+        page_size: 8
+      }
+      })
+
+      console.log(response.data.results);
+      return response.data.results
+  } catch (error) {
+    alert(error)
+  }
+}
+
+
+async function getRandomGames() {
+  try {
+    
+    const response = await axios.get('https://api.rawg.io/api/games', {
+      params: {
+        key: apiKey,       
+        page_size: 8,      
+        ordering: 'random'  
+      }
+    });
+
+    return response.data.results;
+
+  } catch (error) {
+    alert('Error fetching games:', error);
+  }
+}
+
+
+getRandomGames();
+
+handledays()
 
