@@ -281,11 +281,32 @@ body {
     position: absolute;
     width: 200px;
     /* height: 200px; */
-    bottom: 0;
+    bottom:-2px;
     right: 0;
     padding: 10px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     z-index: 1000;
     margin: 10px;
     background-color: blanchedalmond;
+    border-radius: 30px;
+}
+
+.alerting * {
+    font-size: 15px;
+}
+
+.alerting:hover {
+    outline: 1px solid white;
+    outline-offset: 3px;
+}
+
+footer a {
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.4s;
+}
+
+footer a:hover {
+    color: rgba(255, 255, 255, 0.427) !important;
+    transform: scale(1.1) !important;
 }
