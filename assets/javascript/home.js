@@ -127,13 +127,15 @@ const buttons = document.querySelectorAll('.inner button');
 
 getUpcomingGamesWithDetails(0)
 //////////////////////////////////////////
+
+
+/////////////////////////////////////////
+//coming and new games
 const cardContainer = document.querySelector('.section-cards-c');
 
 const create = async (games) => {
   for (const game of games) {
     const gameDetails = await fetchGameDetails(game.id);
-    // console.log(gameDetails);
-    // console.log(gameDetails);
     const encodedGameName = encodeURIComponent(gameDetails.name);
     const playstaionUrl = `https://www.google.com/search?q=${encodedGameName}+game`
     const website = gameDetails.website ? gameDetails.website : playstaionUrl
@@ -254,7 +256,66 @@ async function getRandomGames() {
 }
 
 
-getRandomGames();
+// getRandomGames();
 
 handledays()
 
+///////////////////////////
+class LocalStorageData {
+  static setData(data) {
+    localStorage.setItem('user', JSON.stringify(data.id));
+  }
+
+  static getData(term) {
+    const data = localStorage.getItem(term);
+    return JSON.parse(data);
+  }
+
+  static removeData() {
+    localStorage.removeItem('user');
+  }
+}
+
+const signInButtonContainer = document.querySelector('.sign-in');
+const checkUser = async () => {
+  try {
+    const token = LocalStorageData.getData('user');
+    console.log(token);
+    console.log(token);
+
+    if (token) {
+      const res = await fetch(
+        `https://66681ccef53957909ff69fee.mockapi.io//users/${token}`
+      );
+
+      if (res.status !== 200) {
+        // const toAlert = createElement('section',['alerting']);
+        // document.body.append(toAlert)
+        // window.location.replace('/pages/signin.html');
+      } else {
+        const user = await res.json();
+        signInButtonContainer.innerHTML = ''
+        signInButtonContainer.innerHTML = '<a href="./index.html" class="btn btn-primary btn-w">Log out</a>';
+        signInButtonContainer.children[0].style.background = 'darkblue'
+        signInButtonContainer.addEventListener('click',()=> {
+          LocalStorageData.removeData();
+        })
+
+      }
+    } else {
+      const toAlert = createElement('section',['alerting']);
+      toAlert.innerHTML = `<button type="button" class="btn-close" aria-label="Close"></button>
+      <h5 class=" text-center">noticed that you haven't signed in yet. Signing in unlocks a world of magic for you.</h5>`
+      document.body.append(toAlert)
+      const closeButton = document.querySelector('.btn-close');
+      closeButton.addEventListener('click',()=> {
+      toAlert.style.display = 'none'
+      })
+      // window.location.replace('/pages/signin.html');
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+checkUser();

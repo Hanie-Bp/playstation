@@ -185,6 +185,11 @@ body {
  height: 250px !important;
  object-fit: cover;
  border: none;
+ transition: transform 0.6s;
+}
+
+.day:hover {
+    transform: scale(1.1);
 }
 
 .back_ground {
@@ -214,6 +219,12 @@ body {
 
 .a-link {
     width: 80px;
+    transition: transform 0.6s;
+}
+
+.a-link:hover {
+    transform: scale(0.8);
+    
 }
 
 
@@ -236,4 +247,45 @@ body {
 .clicked {
     background-color: white !important;
     color: black !important;
+}
+
+
+/* sign in */
+@media only screen and (max-width: 768px){
+    .box-area{
+       margin: 0 10px;
+    }
+
+    .featured-image {
+        width: 100%;
+    }
+    .left-box{
+       height: 150px;
+       /* overflow: hidden; */
+    }
+    .right-box{
+       padding: 20px;
+    }
+}
+#body {
+    height: 100vh;
+    background-color: blue;
+    background-image: url(../images/wp6256889-vintage-aesthetic-ps4-wallpapers.jpg);
+    background-position: unset;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply;
+}
+
+.alerting {
+    position: absolute;
+    width: 200px;
+    /* height: 200px; */
+    bottom: 0;
+    right: 0;
+    padding: 10px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    z-index: 1000;
+    margin: 10px;
+    background-color: blanchedalmond;
 }
