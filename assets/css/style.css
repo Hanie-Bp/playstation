@@ -513,3 +513,36 @@ footer a:hover {
 .card-li span {
   color: black;
 }
+
+.vr-container {
+  background: url(../images/psvr2-register-homepage-hero-desktop-01-en-14nov22.webp);
+  min-height: 90vh;
+  /* min-height: 100vh; */
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.vr-wrapper {
+  height: 300px;
+}
+
+.vr-wrapper a {
+  width: 150px;
+}
+
+@media screen and (max-width: 650px) {
+  .vr-wrapper {
+    text-align: center;
+    align-items: center;
+    display: flex;
+    padding: 0 !important;
+
+    width: 100% !important;
+  }
+
+  .vr-wrapper p {
+    width: 90vw !important;
+    text-wrap: wrap;
+  }
+}
