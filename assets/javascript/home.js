@@ -108,7 +108,7 @@ async function getUpcomingGamesWithDetails(i) {
   }
 }
 
-// getUpcomingGamesWithDetails(0)
+getUpcomingGamesWithDetails(0)
 //////////////////////////////////////////
 
 /////////////////////////////////////////
@@ -232,7 +232,7 @@ async function getRandomGames() {
 
 // getRandomGames();
 
-// handledays()
+handledays()
 
 ///////////////////////////
 class LocalStorageData {

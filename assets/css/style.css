@@ -546,3 +546,48 @@ footer a:hover {
     text-wrap: wrap;
   }
 }
+
+
+.form-select {
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+
+.wrapper-img {
+  margin: 0 auto;
+  border-radius: 20px;
+}
+
+.wrapper-img img{
+  width:90%;
+  height: 60vh;
+  border-radius: 20px;
+}
+
+.width-content {
+  /* width: 100%; */
+  margin-bottom: 20px;
+}
+.information-wrapper {
+  margin: 10px 0;
+}
+
+.heading-selects {
+  background-color: #666;
+  padding: 20px 0;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 910px) {
+  .hanie {
+    /* flex-direction: column; */
+  }
+  .select-wrapper {
+    background-color: #666 !important;
+  }
+
+  .select-wrapper select {
+    width: 90%;
+  }
+}
