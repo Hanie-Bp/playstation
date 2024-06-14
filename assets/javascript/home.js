@@ -106,11 +106,9 @@ async function getUpcomingGamesWithDetails(i) {
     Array.from(items)[0].classList.add("active");
     const buttons = document.querySelectorAll(".inner button");
   }
-
-
 }
 
-getUpcomingGamesWithDetails(0)
+// getUpcomingGamesWithDetails(0)
 //////////////////////////////////////////
 
 /////////////////////////////////////////
@@ -234,7 +232,7 @@ async function getRandomGames() {
 
 // getRandomGames();
 
-handledays()
+// handledays()
 
 ///////////////////////////
 class LocalStorageData {
@@ -264,7 +262,7 @@ const checkUser = async () => {
       );
 
       if (res.status !== 200) {
-        // 
+        //
       } else {
         const user = await res.json();
         signInButtonContainer.innerHTML = "";
@@ -294,7 +292,7 @@ checkUser();
 /////////////////////////
 const carousel2 = document.querySelector(".carousel2");
 
-function createLi(title, image, summary, genres, shortDes,linkUrl) {
+function createLi(title, image, summary, genres, shortDes, linkUrl) {
   const img = createElement("img");
   img.src = image;
   img.setAttribute("draggable", "false");
@@ -319,7 +317,7 @@ function createLi(title, image, summary, genres, shortDes,linkUrl) {
     [cardBack, imgWrapper, heading, span]
   );
   const link = createElement("a", ["link-li"], [listItem]);
-  link.href = linkUrl
+  link.href = linkUrl;
   carousel2.append(link);
 
   const arrowBtns = document.querySelectorAll(".wrapper i");
@@ -376,8 +374,6 @@ const fetchDeatails = async (id) => {
     alert(error);
   }
 };
-
-
 
 async function displayGames() {
   const games = await fetchGames();
