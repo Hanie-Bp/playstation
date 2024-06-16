@@ -248,23 +248,7 @@ const getRandomGames = async () => {
 
 getRandomGames();
 
-// async function getRandomGames() {
-//   try {
-//     const response = await axios.get("https://api.rawg.io/api/games", {
-//       params: {
-//         key: apiKey,
-//         page_size: 8,
-//         ordering: "random",
-//       },
-//     });
 
-//     return response.data.results;
-//   } catch (error) {
-//     alert("Error fetching games:", error);
-//   }
-// }
-
-// getRandomGames();
 
 handledays();
 
@@ -310,6 +294,7 @@ const checkUser = async () => {
     } else {
       const toAlert = createElement("section", ["alerting"]);
       toAlert.innerHTML = `<button type="button" class="btn-close" aria-label="Close"></button>
+      <img src="./assets/images/ps.jpeg" alt="alert">
       <h5 class=" text-center">noticed that you haven't signed in yet. Signing in unlocks a world of magic for you.</h5>`;
       document.body.append(toAlert);
       const closeButton = document.querySelector(".btn-close");
