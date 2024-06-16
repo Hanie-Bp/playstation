@@ -557,11 +557,14 @@ footer a:hover {
 .wrapper-img {
   margin: 0 auto;
   border-radius: 20px;
+  /* border: 1px solid #e91e63; */
 }
 
 .wrapper-img img{
-  width:90%;
+  width:100%;
   height: 60vh;
+  /* margin: 0 auto; */
+  /* border: 1px solid; */
   border-radius: 20px;
 }
 
@@ -580,14 +583,32 @@ footer a:hover {
 }
 
 @media screen and (max-width: 910px) {
-  .hanie {
-    /* flex-direction: column; */
-  }
-  .select-wrapper {
-    background-color: #666 !important;
-  }
 
   .select-wrapper select {
     width: 90%;
   }
+}
+
+.information-wrapper span {
+  display: block;
+  font-size: 17px;
+  color: rgba(0, 102, 255, 0.881);
+}
+
+.information-wrapper {
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  /* padding: 0; */
+  padding-top: 28px;
+  padding-left: 10px;
+  border-radius: 10px;
+}
+.summary {
+  /* border: 1px solid black; */
+  box-shadow: 0 0 3px #666;
+  padding: 10px;
+  border-radius: 10px;
 }
