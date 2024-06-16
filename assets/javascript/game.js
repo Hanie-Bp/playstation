@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchIcon = document.querySelector(".search-icon");
 
   searchIcon.addEventListener("click", () => {
-    console.log("hey");
+    // console.log("hey");
     searchInput.focus();
   });
 
@@ -75,13 +75,6 @@ const formSelect2 = selectedElement(".form-select-2");
 
 const parentGame = selectedElement(".parent-game");
 function createGame(name, bgImage, realese, platforms, summary, website) {
-  // let parentPlatforms = [];
-  // platforms.forEach((plat) => {
-  //   parentPlatforms.push(plat.platform.name);
-  // });
-  // console.log(parentPlatforms);
-  // const platform1 = platforms[0];
-  // const platform2 = platforms[1];
   const img = createElement("img", ["img-game"]);
   img.src = bgImage;
   const imgWrapper = createElement("div", ["wrapper-img"], [img]);
@@ -90,7 +83,6 @@ function createGame(name, bgImage, realese, platforms, summary, website) {
   const p2 = createElement("p");
   p2.innerHTML = `<span>Realese: </span>${realese}`;
   const p3 = createElement("p");
-  // p3.innerText = `Platforms: ${parentPlatforms.join(" | ")}`;
   p3.innerHTML = `<span>Platforms: </span>${platforms}`;
   const p4 = createElement("p");
   const description = createElement("p", ["summary"]);
@@ -105,18 +97,6 @@ function createGame(name, bgImage, realese, platforms, summary, website) {
 
   parentGame.append(imgWrapper, informationWrapper, description, link);
 }
-
-const getGenre = async (id) => {
-  try {
-    const response = await axios.get(
-      `https://api.rawg.io/api/games?genres=${id}&key=${apiKey}`
-    );
-    // console.log(response);
-    return response.data.results;
-  } catch (error) {
-    alert(error);
-  }
-};
 
 ///////////////////////////
 async function fetchGameDetails(gameId) {
@@ -141,7 +121,6 @@ async function fetchGameDetails(gameId) {
 
 formSelect2.addEventListener("change", async (e) => {
   parentGame.innerHTML = "";
-  // console.log(e.target);
   const selectedIndex = e.target.selectedIndex;
   const selectedOption = e.target.options[selectedIndex];
   const game = await fetchGameDetails(selectedOption.id);
@@ -156,7 +135,7 @@ formSelect2.addEventListener("change", async (e) => {
   );
 });
 
-const geners = async () => {
+const getGames = async () => {
   const options = {
     method: "GET",
     url: "https://free-to-play-games-database.p.rapidapi.com/api/games",
@@ -172,16 +151,18 @@ const geners = async () => {
   try {
     const response = await axios.request(options);
     console.log(response.data);
+    return response.data;
   } catch (error) {
     console.error(error);
   }
 };
 
-geners();
+getGames();
 
 formSelect1.addEventListener("change", async (e) => {
+  const optionOne = e.target.children[0];
+  console.log(optionOne);
   formSelect2.innerHTML = "";
-  // const option = e.target.value;
   try {
     const genre = e.target.value;
     const options = {
@@ -213,3 +194,71 @@ formSelect1.addEventListener("change", async (e) => {
     alert(error);
   }
 });
+
+//search functionality
+
+async function eventHandler(value) {
+  const games = await getGames();
+  const filteredGames = games.filter((game) =>
+    game.title.toLowerCase().startsWith(value.toLowerCase())
+  );
+  console.log(filteredGames);
+  parentGame.innerHTML = "";
+  if (filteredGames.length === 0) {
+    const pargraph = createElement("p");
+    pargraph.innerText = "Nothing Found";
+    parentGame.append(pargraph);
+    return;
+  }
+  const row = createElement("div", [
+    "row",
+    "row-cols-1",
+    "row-cols-md-3",
+    "g-4",
+    "row-games",
+  ]);
+  parentGame.append(row);
+  filteredGames.forEach((game) =>
+    createCard(
+      game.title,
+      game.thumbnail,
+      game.freetogame_profile_url,
+      game.genre,
+      game.short_description
+    )
+  );
+}
+const searchInput = selectedElement("#search");
+searchInput.addEventListener("change", (e) => {
+  const inputValue = e.target.value;
+  eventHandler(inputValue);
+  e.target.value = "";
+});
+const createCard = (name, image, website, genre, description) => {
+  const row = selectedElement(".row-games");
+  const col = createElement("div", ["col", "col-game"]);
+  col.innerHTML = `<div class="card  card-game">
+      <img src=${image} class="card-img-top rounded" alt=${name}>
+      <div class="card-body body-game">
+        <h5 class="card-title">${name}</h5>
+        <p class="card-text">${genre}</p>
+        <p class="card-text">${description}</p>
+       <a href=${website} target="_blank" class="btn btn-outline-dark" >More</a>
+      </div>
+    </div>`;
+  row.append(col);
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  var searchValue = localStorage.getItem("inputValue");
+  parentGame.innerHTML = "";
+  if (searchValue) {
+    eventHandler(searchValue);
+    localStorage.removeItem("inputValue");
+    // parentGame.innerHTML = "";
+  }
+});
+
+// window.addEventListener("load", (event) => {
+//   parentGame.innerHTML = "";
+// });

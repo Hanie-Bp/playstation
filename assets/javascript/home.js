@@ -32,42 +32,37 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 //////////////////
-
-// const apiKey = "6696da3ed4794d2dbcad58b3d495e0dd";
-// const apiUrl = `https://api.rawg.io/api/games?key=${apiKey}&dates=2024-01-01,2024-12-31&ordering=-added&page_size=10`;
-// const getData = async () => {
-//   try {
-//     const {
-//       data: { results },
-//     } = await axios.get(apiUrl);
-//     return results;
-//   } catch (error) {
-//     alert(error);
-//   }
-// };
+const search = selectedElement(".search");
+search.addEventListener("change", (e) => {
+  const inputValue = e.target.value.trim();
+  if (inputValue) {
+    localStorage.setItem("inputValue", inputValue);
+    window.location.href = "./pages/game.html";
+  }
+});
 
 const options = {
-  method: 'GET',
-  url: 'https://free-to-play-games-database.p.rapidapi.com/api/games',
+  method: "GET",
+  url: "https://free-to-play-games-database.p.rapidapi.com/api/games",
   params: {
-    'sort-by': 'release-date',
-    'sort-order': 'desc', // Sort by newest first
-    'page-size': 10 // Limit to 10 games
+    "sort-by": "release-date",
+    "sort-order": "desc",
+    "page-size": 10,
   },
   headers: {
-    'x-rapidapi-key': 'aeeb7810f6msh4f9666d654d2878p1ff652jsn543bfe84f695',
-    'x-rapidapi-host': 'free-to-play-games-database.p.rapidapi.com'
-  }
+    "x-rapidapi-key": "aeeb7810f6msh4f9666d654d2878p1ff652jsn543bfe84f695",
+    "x-rapidapi-host": "free-to-play-games-database.p.rapidapi.com",
+  },
 };
 
 const getData = async () => {
   try {
     const response = await axios.request(options);
-    const tenNewestGames = response.data.slice(0,10);
+    const tenNewestGames = response.data.slice(0, 10);
     // console.log(tenNewestGames);
     return tenNewestGames;
   } catch (error) {
-    console.error('Error fetching games:', error);
+    console.error("Error fetching games:", error);
     return [];
   }
 };
@@ -77,29 +72,17 @@ const carouselConttainer = selectedElement(".carousel-1");
 const carouselIndicators = selectedElement(".inner");
 const newArr = [];
 
-// const BaseUrl = `https://api.rawg.io/api/games?key=${apiKey}&dates=2024-06-01,2024-12-31&ordering=-released&page=1&page_size=10`;
-
-// async function fetchGameDetails(gameId) {
-//   const url = `https://api.rawg.io/api/games/${gameId}?key=${apiKey}`;
-//   try {
-//     const response = await axios.get(url);
-//     return response.data;
-//   } catch (error) {
-//     console.error(`Failed to fetch details for game ID ${gameId}:`, error);
-//   }
-// }
-
 const fetchGameDetailsById = async (gameId) => {
   const options = {
-    method: 'GET',
-    url: 'https://free-to-play-games-database.p.rapidapi.com/api/game',
+    method: "GET",
+    url: "https://free-to-play-games-database.p.rapidapi.com/api/game",
     params: {
-      id: gameId
+      id: gameId,
     },
     headers: {
-      'x-rapidapi-key': 'aeeb7810f6msh4f9666d654d2878p1ff652jsn543bfe84f695',
-      'x-rapidapi-host': 'free-to-play-games-database.p.rapidapi.com'
-    }
+      "x-rapidapi-key": "aeeb7810f6msh4f9666d654d2878p1ff652jsn543bfe84f695",
+      "x-rapidapi-host": "free-to-play-games-database.p.rapidapi.com",
+    },
   };
 
   try {
@@ -107,7 +90,7 @@ const fetchGameDetailsById = async (gameId) => {
     return response.data;
   } catch (error) {
     console.error(`Error fetching game details for ID ${gameId}:`, error);
-    return null; // Return null in case of error
+    return null;
   }
 };
 
@@ -115,12 +98,9 @@ async function getUpcomingGamesWithDetails() {
   const games = await getData();
   if (games) {
     for (const game of games) {
-      // console.log('game',game);
       const index = games.indexOf(game);
-      const gameDetails = game
-      // await fetchGameDetailsById(game.id);
+      const gameDetails = game;
       newArr.push(gameDetails.thumbnail);
-      // const genre = gameDetails.genres[0].name;
       const carouselItem = createElement("div", [
         "carousel-item",
         "item-large",
@@ -159,7 +139,7 @@ async function getUpcomingGamesWithDetails() {
   }
 }
 
-getUpcomingGamesWithDetails()
+getUpcomingGamesWithDetails();
 //////////////////////////////////////////
 
 /////////////////////////////////////////
@@ -233,11 +213,11 @@ buttonsTabs.forEach((button) => {
 const getComingSoonGames = async () => {
   try {
     const response = await axios.request(options);
-    const randomGames = response.data.slice(30,38);
+    const randomGames = response.data.slice(30, 38);
     console.log(randomGames);
     return randomGames;
   } catch (error) {
-    console.error('Error fetching random games:', error);
+    console.error("Error fetching random games:", error);
     return [];
   }
 };
@@ -245,27 +225,23 @@ const getComingSoonGames = async () => {
 const getNewReleases = async () => {
   try {
     const response = await axios.request(options);
-    const randomGames = response.data.slice(20,28);
+    const randomGames = response.data.slice(20, 28);
     console.log(randomGames);
     return randomGames;
   } catch (error) {
-    console.error('Error fetching random games:', error);
+    console.error("Error fetching random games:", error);
     return [];
   }
 };
 
-
-
-
-
 const getRandomGames = async () => {
   try {
     const response = await axios.request(options);
-    const randomGames = response.data.slice(12,20);
+    const randomGames = response.data.slice(12, 20);
     console.log(randomGames);
     return randomGames;
   } catch (error) {
-    console.error('Error fetching random games:', error);
+    console.error("Error fetching random games:", error);
     return [];
   }
 };
@@ -290,7 +266,7 @@ getRandomGames();
 
 // getRandomGames();
 
-handledays()
+handledays();
 
 ///////////////////////////
 class LocalStorageData {
@@ -391,7 +367,7 @@ function createLi(title, image, summary, genres, shortDes, linkUrl) {
 // https://rapidapi.com/digiwalls/api/free-to-play-games-database
 const option = {
   method: "GET",
-  url:'https://free-to-play-games-database.p.rapidapi.com/api/games',
+  url: "https://free-to-play-games-database.p.rapidapi.com/api/games",
   headers: {
     "x-rapidapi-key": "aeeb7810f6msh4f9666d654d2878p1ff652jsn543bfe84f695",
     "x-rapidapi-host": "free-to-play-games-database.p.rapidapi.com",

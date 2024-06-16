@@ -116,6 +116,14 @@ body {
   }
 }
 
+#navbarSupportedContent a:hover {
+  border-radius: 10px; 
+  /* border-bottom: 1px solid rgb(97, 125, 250); */
+  box-shadow: 0 0 3px rgb(97, 125, 250);
+  /* outline: 1px solid rgb(97, 125, 250);  */
+  /* background-color:  rgba(97, 125, 250, 0.253); */
+}
+
 .width_1 {
   max-width: 200px;
 }
@@ -506,12 +514,13 @@ footer a:hover {
 }
 
 .card-li:hover .cardback {
-  background-color: #c7c2c2 !important;
+  background-color: rgba(0, 0, 0, 0.559) !important;
   opacity: 1 !important;
 }
 
 .card-li span {
-  color: black;
+  display: block;
+  color: rgb(65, 149, 218);
 }
 
 .vr-container {
@@ -547,29 +556,23 @@ footer a:hover {
   }
 }
 
-
 .form-select {
   width: 200px;
   margin-bottom: 20px;
 }
 
-
 .wrapper-img {
   margin: 0 auto;
   border-radius: 20px;
-  /* border: 1px solid #e91e63; */
 }
 
-.wrapper-img img{
-  width:100%;
+.wrapper-img img {
+  width: 100%;
   height: 60vh;
-  /* margin: 0 auto; */
-  /* border: 1px solid; */
   border-radius: 20px;
 }
 
 .width-content {
-  /* width: 100%; */
   margin-bottom: 20px;
 }
 .information-wrapper {
@@ -583,7 +586,6 @@ footer a:hover {
 }
 
 @media screen and (max-width: 910px) {
-
   .select-wrapper select {
     width: 90%;
   }
@@ -601,14 +603,53 @@ footer a:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  /* padding: 0; */
   padding-top: 28px;
   padding-left: 10px;
   border-radius: 10px;
 }
 .summary {
-  /* border: 1px solid black; */
   box-shadow: 0 0 3px #666;
   padding: 10px;
   border-radius: 10px;
+}
+
+.row-games {
+  margin-top: 10px;
+  background-color: black;
+  padding: 30px;
+}
+
+.col-game img {
+  box-shadow: 0 0 10px #999;
+}
+
+.body-game {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-game {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+.card-game a {
+  width: 100px;
+}
+
+.card-game {
+  transform: scale(0.9);
+}
+
+.card-game:hover {
+  transform: scale(1);
+  background-color: black;
+  color: white;
+  box-shadow: 0 0 5px white;
+}
+
+.card-game:hover a {
+  color: white;
 }
