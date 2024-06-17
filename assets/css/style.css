@@ -121,7 +121,7 @@ body {
 }
 
 #navbarSupportedContent a:hover {
-  border-radius: 10px; 
+  border-radius: 10px;
   /* border-bottom: 1px solid rgb(97, 125, 250); */
   box-shadow: 0 0 3px rgb(97, 125, 250);
   /* outline: 1px solid rgb(97, 125, 250);  */
@@ -281,19 +281,22 @@ body {
 }
 
 .alerting button {
-  padding: 10px;
+  padding: 4px;
+  /* margin-top: 0px; */
   margin-bottom: 10px;
   background-color: white;
-  margin-left: 170px;
+  margin-left: 190px;
 }
 
 .alerting img {
+  margin-bottom: 20px;
   width: 100%;
   height: 100px;
 }
 
 .alerting h5 {
   padding: 5px;
+  margin-bottom: 20px;
 }
 
 .alerting * {
@@ -538,7 +541,7 @@ footer a:hover {
 }
 
 .card-li:hover .cardback {
-  background-color: rgba(0, 0, 0, 0.559) !important;
+  background-color: rgba(0, 0, 0, 0.637) !important;
   opacity: 1 !important;
 }
 
@@ -676,4 +679,10 @@ footer a:hover {
 
 .card-game:hover a {
   color: white;
+}
+
+.alert_section {
+  width: 400px;
+  margin: 0 auto;
+  text-align: center;
 }

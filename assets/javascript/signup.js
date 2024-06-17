@@ -1,33 +1,33 @@
 class LocalStorageData {
-    static setData(data) {
-      localStorage.setItem('user', JSON.stringify(data.id));
-    }
-  
-    static getData(term) {
-      const data = localStorage.getItem(term);
-      return JSON.parse(data);
-    }
-  
-    static removeData() {
-      localStorage.removeItem('user');
-    }
+  static setData(data) {
+    localStorage.setItem("user", JSON.stringify(data.id));
   }
-//////////////////////////////
-  const BASE_URL = 'https://66681ccef53957909ff69fee.mockapi.io';
 
- class Authentication {
+  static getData(term) {
+    const data = localStorage.getItem(term);
+    return JSON.parse(data);
+  }
+
+  static removeData() {
+    localStorage.removeItem("user");
+  }
+}
+//class auth
+const BASE_URL = "https://66681ccef53957909ff69fee.mockapi.io";
+
+class Authentication {
   constructor(email, password) {
     this.email = email;
     this.password = password;
   }
 
   verifyData() {
-    if (!this.email.endsWith('@gmail.com')) {
-      throw new Error('emailError');
+    if (!this.email.endsWith("@gmail.com")) {
+      throw new Error("emailError");
     }
 
     if (this.password.length < 5) {
-      throw new Error('passwordError');
+      throw new Error("passwordError");
     }
   }
 
@@ -36,25 +36,24 @@ class LocalStorageData {
       const getUsers = await fetch(`${BASE_URL}/users`);
       const users = await getUsers.json();
 
-      // const doesUserExists = users.filter(user => user.email === this.email )
       const doesUserExists = users.find((user) => user.email === this.email);
 
       if (doesUserExists) {
         return {
           statusCode: 409,
-          message: 'the email is already exists',
-          data: '',
+          message: "the email is already exists",
+          data: "",
         };
       }
 
       const response = await fetch(`${BASE_URL}/users`, {
-        method: 'POST',
+        method: "POST",
         body: JSON.stringify({
           email: this.email,
           password: this.password,
         }),
         headers: {
-          'content-type': 'application/json',
+          "content-type": "application/json",
         },
       });
 
@@ -62,11 +61,11 @@ class LocalStorageData {
 
       return {
         statusCode: 201,
-        message: 'signed up successfully',
+        message: "signed up successfully",
         data: createdUser,
       };
     } catch (error) {
-      console.log('in catch block');
+      console.log("in catch block");
       console.log(error);
     }
   }
@@ -80,35 +79,35 @@ class LocalStorageData {
     if (!doesUserExits) {
       return {
         statusCode: 404,
-        message: 'email or password incorrect',
-        data: '',
+        message: "email or password incorrect",
+        data: "",
       };
     }
 
     if (this.password !== doesUserExits.password) {
       return {
         statusCode: 404,
-        message: 'email or password incorrect',
-        data: '',
+        message: "email or password incorrect",
+        data: "",
       };
     }
 
     return {
       statusCode: 200,
-      message: 'logged in successfully',
+      message: "logged in successfully",
       data: doesUserExits,
     };
   }
 }
-////////////////////
-const signUpForm = document.querySelector('form');
-const messagePreview = document.querySelector('.message');
+//sign up event
+const signUpForm = document.querySelector("form");
+const messagePreview = document.querySelector(".message");
 
-signUpForm.addEventListener('submit', async (e) => {
+signUpForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   console.log(e);
 
-  messagePreview.textContent = '';
+  messagePreview.textContent = "";
 
   const emailInput = e.target.email;
   const passwordInput = e.target.password;
@@ -123,24 +122,20 @@ signUpForm.addEventListener('submit', async (e) => {
     console.log(res);
     if (res.statusCode === 409) {
       messagePreview.textContent = res.message;
-      messagePreview.style.color = 'crimson';
+      messagePreview.style.color = "red";
     }
 
     if (res.statusCode === 201) {
       console.log(res);
 
       LocalStorageData.setData(res.data);
-      window.location.replace('../index.html');
+      window.location.replace("../index.html");
     }
   } catch (error) {
-    if (error.message === 'passwordError') {
+    if (error.message === "passwordError") {
       messagePreview.textContent =
-        'your password should be more than 5 characters';
-      messagePreview.style.color = 'crimson';
-    }
-
-    if (error.message === 'emailError') {
-      // code
+        "your password should be more than 5 characters";
+      messagePreview.style.color = "red";
     }
   }
 });

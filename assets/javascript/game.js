@@ -255,10 +255,5 @@ document.addEventListener("DOMContentLoaded", () => {
   if (searchValue) {
     eventHandler(searchValue);
     localStorage.removeItem("inputValue");
-    // parentGame.innerHTML = "";
   }
 });
-
-// window.addEventListener("load", (event) => {
-//   parentGame.innerHTML = "";
-// });

@@ -248,8 +248,6 @@ const getRandomGames = async () => {
 
 getRandomGames();
 
-
-
 handledays();
 
 ///////////////////////////

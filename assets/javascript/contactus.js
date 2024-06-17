@@ -34,6 +34,7 @@ const checkUser = async () => {
 
 checkUser();
 
+//update user
 const updateUsers = async (obj) => {
   try {
     const token = LocalStorageData.getData("user");
@@ -47,14 +48,21 @@ const updateUsers = async (obj) => {
   }
 };
 
+//form event
 const form = document.querySelector("form");
+const alertSection = document.querySelector(".alert_section");
+alertSection.style.display = "none";
 form.addEventListener("submit", (e) => {
+  e.preventDefault();
   const obj = {
     name: e.target.name.value,
     message: e.target.textarea.value,
   };
 
   updateUsers(obj);
+  alertSection.style.display = "block";
 
-  alert("thanks for your time");
+  e.target.name.value = "";
+  e.target.email.value = "";
+  e.target.textarea.value = "";
 });
