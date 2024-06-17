@@ -1,4 +1,3 @@
-// import { createElement,selectedElement } from "../../utils/domUtils" ;
 const createElement = (name, classes, content) => {
   const element = document.createElement(name);
   if (classes) {
@@ -32,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 //////////////////
+//search event
 const search = selectedElement(".search");
 search.addEventListener("change", (e) => {
   const inputValue = e.target.value.trim();
@@ -41,6 +41,7 @@ search.addEventListener("change", (e) => {
   }
 });
 
+//get data
 const options = {
   method: "GET",
   url: "https://free-to-play-games-database.p.rapidapi.com/api/games",
@@ -59,7 +60,6 @@ const getData = async () => {
   try {
     const response = await axios.request(options);
     const tenNewestGames = response.data.slice(0, 10);
-    // console.log(tenNewestGames);
     return tenNewestGames;
   } catch (error) {
     console.error("Error fetching games:", error);
@@ -94,9 +94,23 @@ const fetchGameDetailsById = async (gameId) => {
   }
 };
 
+//make carousel1
+const images = [
+  "./assets/images/pic1.jpeg",
+  "./assets/images/pic2.png",
+  "./assets/images/pic3.png",
+  "./assets/images/pic4.jpg",
+  "./assets/images/pic5.jpg",
+  "./assets/images/pic6.jpg",
+  "./assets/images/pic7.jpg",
+  "./assets/images/pic8.jpg",
+  "./assets/images/pic9.jpg",
+  "./assets/images/pic10.jpg",
+];
 async function getUpcomingGamesWithDetails() {
   const games = await getData();
   if (games) {
+    let i = 0;
     for (const game of games) {
       const index = games.indexOf(game);
       const gameDetails = game;
@@ -111,13 +125,17 @@ async function getUpcomingGamesWithDetails() {
       link.href = gameDetails.website;
       carouselItem.innerHTML = `
           <div class=" d-flex align-items-center position-relative w-100">
-          <img src=${gameDetails.thumbnail} class='height-img-hero w-100'></img>
+          <img src=${images[i++]} class='height-img-hero w-100'></img>
             <div class="container text-start p-5 w-50 text-hero  text-white position-absolute">
               <span class="text-capitalize mb-1 ps-2 fst-italic ">new release</span>
-              <h1 class="h1 fs-1 fw-bold text-uppercase pb-4 pt-4">${gameDetails.title}
+              <h1 class="h1 fs-1 fw-bold text-uppercase pb-4 pt-4">${
+                gameDetails.title
+              }
               </h1>
               <p class="width_1 fw-semibold">${gameDetails.genre}</p>
-              <a href=${gameDetails.game_url} class="btn btn-light z-index  position-absolute" >More</a>
+              <a href=${
+                gameDetails.game_url
+              } class="btn btn-light z-index  position-absolute" >More</a>
             </div>
           </div>`;
       link.append(carouselItem);
@@ -135,12 +153,10 @@ async function getUpcomingGamesWithDetails() {
     const items = document.querySelectorAll(".carousel-item");
     // console.log(items);
     Array.from(items)[0].classList.add("active");
-    const buttons = document.querySelectorAll(".inner button");
   }
 }
 
 getUpcomingGamesWithDetails();
-//////////////////////////////////////////
 
 /////////////////////////////////////////
 //coming and new games
@@ -246,7 +262,7 @@ const getRandomGames = async () => {
   }
 };
 
-getRandomGames();
+// getRandomGames();
 
 handledays();
 
@@ -269,12 +285,11 @@ class LocalStorageData {
 const signInButtonContainer = document.querySelector(".sign-in");
 const checkUser = async () => {
   try {
-    const token = LocalStorageData.getData("user");
-    // console.log(token);
+    const user = LocalStorageData.getData("user");
 
-    if (token) {
+    if (user) {
       const res = await fetch(
-        `https://66681ccef53957909ff69fee.mockapi.io//users/${token}`
+        `https://66681ccef53957909ff69fee.mockapi.io//users/${user}`
       );
 
       if (res.status !== 200) {
@@ -307,6 +322,8 @@ const checkUser = async () => {
 
 checkUser();
 /////////////////////////
+
+//make carousel2
 const carousel2 = document.querySelector(".carousel2");
 
 function createLi(title, image, summary, genres, shortDes, linkUrl) {
@@ -347,7 +364,7 @@ function createLi(title, image, summary, genres, shortDes, linkUrl) {
     });
   });
 }
-// https://rapidapi.com/digiwalls/api/free-to-play-games-database
+
 const option = {
   method: "GET",
   url: "https://free-to-play-games-database.p.rapidapi.com/api/games",
