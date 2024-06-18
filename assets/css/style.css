@@ -31,22 +31,16 @@ body {
 
 .logo {
   height: 20px;
-  /* background-color: aqua; */
   padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* .search-section {
-    margin-left: 150px;
-} */
-
 .search-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* height: 100%; */
 }
 
 .search {
@@ -98,6 +92,16 @@ body {
     gap: 10px;
   }
 
+  .profile {
+    width: 100%;
+  }
+  .profile a {
+    display: flex;
+    justify-content: end;
+  }
+  .profile a i {
+    align-self: flex-end;
+  }
   .pages {
     display: flex;
     justify-content: space-between;
@@ -118,6 +122,22 @@ body {
   .search-container {
     width: 100vw;
   }
+}
+
+.sign-in {
+  display: flex;
+}
+
+.user_profile {
+  /* border: 1px solid red; */
+  padding: 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user_profile i {
+  font-size: 24px;
 }
 
 #navbarSupportedContent a:hover {
@@ -168,7 +188,6 @@ body {
   width: 1000px;
   margin: 0 auto;
   gap: 3px;
-  /* border: 1px solid blue; */
   justify-content: space-around;
   margin-top: 30px;
 }
@@ -224,7 +243,6 @@ body {
 }
 
 .img-wrap {
-  /* height: 200px; */
   display: flex;
   background-color: black;
 }
@@ -691,4 +709,71 @@ footer a:hover {
   width: 400px;
   margin: 0 auto;
   text-align: center;
+}
+
+.user-container {
+  height: 500px;
+  margin: 50px 0;
+  margin-bottom: 65px;
+  padding-left: 20px;
+}
+
+.user-container .container {
+  height: 400px;
+  display: flex;
+  align-items: center;
+}
+
+.input-containers {
+  height: 500px;
+}
+
+.user-container .container .col {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  height: 150px;
+  background-color: #333333;
+  margin-top: 40px;
+}
+
+.inputs {
+  display: flex;
+  align-items: center;
+}
+
+.inputs img {
+  width: 40px;
+  height: 50px;
+  border-radius: 5px;
+  margin-right: 10px;
+  background-color: transparent;
+}
+
+.inputs input {
+  padding: 5px;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #333;
+}
+
+.inputs textarea {
+  border: none;
+  width: 200px;
+  background-color: transparent;
+  border-bottom: 1px solid #333333;
+}
+
+.date {
+  width: 200px;
+}
+
+.inputs *:focus {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #333333;
+}
+
+.input-containers button {
+  width: 80px;
 }

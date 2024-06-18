@@ -31,6 +31,78 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 //////////////////
+//check user
+class LocalStorageData {
+  static setData(data) {
+    localStorage.setItem("user", JSON.stringify(data.id));
+  }
+
+  static getData(term) {
+    const data = localStorage.getItem(term);
+    return JSON.parse(data);
+  }
+
+  static removeData() {
+    localStorage.removeItem("user");
+  }
+}
+const profile = selectedElement('.newitems')
+const signInButtonContainer = document.querySelector(".sign-in");
+const checkUser = async () => {
+  try {
+    const user = LocalStorageData.getData("user");
+
+    if (user) {
+      const res = await fetch(
+        `https://66681ccef53957909ff69fee.mockapi.io//users/${user}`
+      );
+
+      if (res.status !== 200) {
+        //
+      } else {
+        const user = await res.json();
+        console.log(user);
+        const buttonUser = createElement('a',['user_profile']);
+        buttonUser.innerHTML= `<i class="bi bi-person-circle"></i>`;
+        buttonUser.addEventListener('click',()=> {
+          window.location.href = `./pages/userprofile.html`;
+        })
+        signInButtonContainer.innerHTML = "";
+        signInButtonContainer.innerHTML =
+          '<a href="./index.html" class="btn btn-primary btn-w">Log out</a>';
+        signInButtonContainer.children[0].style.background = "darkblue";
+        profile.append(buttonUser)
+        signInButtonContainer.addEventListener("click", () => {
+          LocalStorageData.removeData();
+        });
+        // const buttonUser = createElement('a',['user_profile']);
+        // buttonUser.innerHTML= `<i class="bi bi-person-circle"></i>`;
+        // buttonUser.addEventListener('click',()=> {
+        //   localStorage.setItem('user',user.email)
+        //   window.location.href = `./pages/userprofile.html`;
+        // })
+        // // buttonUser.href = './pages/userprofile.html';
+        // // localStorage.setItem('user',user._id)
+        // signInButtonContainer.append(buttonUser)
+      }
+    } else {
+      const toAlert = createElement("section", ["alerting"]);
+      toAlert.innerHTML = `<button type="button" class="btn-close" aria-label="Close"></button>
+      <img src="./assets/images/ps.jpeg" alt="alert">
+      <h5 class=" text-center">noticed that you haven't signed in yet. Signing in unlocks a world of magic for you.</h5>`;
+      document.body.append(toAlert);
+      const closeButton = document.querySelector(".btn-close");
+      closeButton.addEventListener("click", () => {
+        toAlert.style.display = "none";
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+checkUser();
+///////////////
 //search event
 const search = selectedElement(".search");
 search.addEventListener("change", (e) => {
@@ -267,60 +339,7 @@ const getRandomGames = async () => {
 handledays();
 
 ///////////////////////////
-class LocalStorageData {
-  static setData(data) {
-    localStorage.setItem("user", JSON.stringify(data.id));
-  }
 
-  static getData(term) {
-    const data = localStorage.getItem(term);
-    return JSON.parse(data);
-  }
-
-  static removeData() {
-    localStorage.removeItem("user");
-  }
-}
-
-const signInButtonContainer = document.querySelector(".sign-in");
-const checkUser = async () => {
-  try {
-    const user = LocalStorageData.getData("user");
-
-    if (user) {
-      const res = await fetch(
-        `https://66681ccef53957909ff69fee.mockapi.io//users/${user}`
-      );
-
-      if (res.status !== 200) {
-        //
-      } else {
-        const user = await res.json();
-        signInButtonContainer.innerHTML = "";
-        signInButtonContainer.innerHTML =
-          '<a href="./index.html" class="btn btn-primary btn-w">Log out</a>';
-        signInButtonContainer.children[0].style.background = "darkblue";
-        signInButtonContainer.addEventListener("click", () => {
-          LocalStorageData.removeData();
-        });
-      }
-    } else {
-      const toAlert = createElement("section", ["alerting"]);
-      toAlert.innerHTML = `<button type="button" class="btn-close" aria-label="Close"></button>
-      <img src="./assets/images/ps.jpeg" alt="alert">
-      <h5 class=" text-center">noticed that you haven't signed in yet. Signing in unlocks a world of magic for you.</h5>`;
-      document.body.append(toAlert);
-      const closeButton = document.querySelector(".btn-close");
-      closeButton.addEventListener("click", () => {
-        toAlert.style.display = "none";
-      });
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-checkUser();
 /////////////////////////
 
 //make carousel2
