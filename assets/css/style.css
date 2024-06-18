@@ -156,6 +156,11 @@ body {
   height: 550px;
 }
 
+@media screen and (max-width: 770px) {
+  .pills {
+    flex-direction: column;
+  }
+}
 .inner {
   display: flex;
   border: none;
