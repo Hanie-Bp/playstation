@@ -122,7 +122,7 @@ async function getUpcomingGamesWithDetails() {
         "w-100",
       ]);
       const link = createElement("a");
-      link.href = gameDetails.website;
+      link.href = gameDetails.game_url;
       carouselItem.innerHTML = `
           <div class=" d-flex align-items-center position-relative w-100">
           <img src=${images[i++]} class='height-img-hero w-100'></img>
