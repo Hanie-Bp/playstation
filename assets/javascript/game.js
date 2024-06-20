@@ -57,10 +57,10 @@ const checkUser = async () => {
       );
 
       if (res.status !== 200) {
-        window.location.replace("./signin.html");
+        window.location.replace("./playstation/pages/signin.html");
       }
     } else {
-      window.location.replace("./signin.html");
+      window.location.replace("./playstation/pages/signin.html");
     }
   } catch (error) {
     console.log(error);
