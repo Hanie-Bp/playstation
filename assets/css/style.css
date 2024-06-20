@@ -1,0 +1,796 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Times New Roman", Times, serif;
+}
+
+.sony-bar a {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.sony-bar {
+  background-color: black;
+  text-align: end;
+  padding: 5px;
+}
+
+.btn-w {
+  width: 90px;
+}
+
+.logo {
+  height: 20px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 30px;
+  padding: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.search-input {
+  width: 10px;
+  height: 30px;
+  padding: 5px;
+  border: none;
+  border-radius: 30px;
+  outline: none;
+  transition: width 0.3s ease;
+  padding-left: 10px;
+  color: rgb(97, 125, 250);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.search-input::placeholder {
+  color: transparent;
+}
+
+.search-input:focus::placeholder {
+  color: rgb(97, 125, 250);
+}
+
+.search-input:focus {
+  width: 150px;
+}
+
+.search-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 25px;
+  fill: rgb(97, 125, 250);
+  cursor: pointer;
+}
+
+@media screen and (max-width: 580px) {
+  .res-nav {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .profile {
+    width: 100%;
+  }
+  .profile a {
+    display: flex;
+    justify-content: end;
+  }
+  .profile a i {
+    align-self: flex-end;
+  }
+  .pages {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .logo {
+    position: absolute;
+    right: 0;
+  }
+
+  .sign-in-container {
+    width: 100vw;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .search-container {
+    width: 100vw;
+  }
+}
+
+.sign-in {
+  display: flex;
+}
+
+.user_profile {
+  /* border: 1px solid red; */
+  padding: 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user_profile i {
+  font-size: 24px;
+}
+
+#navbarSupportedContent a:hover {
+  border-radius: 10px;
+  box-shadow: 0 0 3px rgb(97, 125, 250);
+}
+
+.width_1 {
+  max-width: 200px;
+}
+
+.z-index {
+  z-index: 999;
+}
+
+.back-white {
+  background-color: white !important;
+  color: black !important;
+}
+
+.pills button {
+  padding: 5px;
+  border-radius: 30px;
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+.pills button:hover {
+  color: blue;
+}
+
+.onee {
+  height: 80%;
+}
+
+.height-img-hero {
+  height: 550px;
+}
+
+@media screen and (max-width: 770px) {
+  .pills {
+    flex-direction: column;
+  }
+}
+.inner {
+  display: flex;
+  border: none;
+  flex-wrap: wrap;
+  width: 1000px;
+  margin: 0 auto;
+  gap: 3px;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+.inner img {
+  width: 150px;
+  height: 150px;
+  display: block;
+  border-radius: 20px;
+}
+
+.day {
+  width: 200px;
+  height: 250px !important;
+  object-fit: cover;
+  border: none;
+  transition: transform 0.6s;
+}
+
+.day:hover {
+  transform: scale(1.1);
+}
+
+.back_ground {
+  background-color: black;
+  margin-top: 40px;
+}
+
+.width_section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: 100px;
+  row-gap: 50px;
+}
+
+.body-card {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.a-link {
+  width: 80px;
+  transition: transform 0.6s;
+}
+
+.a-link:hover {
+  transform: scale(0.8);
+}
+
+.img-wrap {
+  display: flex;
+  background-color: black;
+}
+.day img {
+  float: left;
+  width: 100%;
+  height: 100px;
+  border-radius: 20px;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.clicked {
+  background-color: white !important;
+  color: black !important;
+}
+
+/* sign in */
+@media only screen and (max-width: 768px) {
+  .box-area {
+    margin: 0 10px;
+  }
+
+  .featured-image {
+    width: 100%;
+  }
+  .left-box {
+    height: 150px;
+  }
+  .right-box {
+    padding: 20px;
+  }
+}
+#body {
+  height: 100vh;
+  background-color: blue;
+  background-image: url(../images/wp6256889-vintage-aesthetic-ps4-wallpapers.jpg);
+  background-position: unset;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: multiply;
+}
+
+.alerting {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+  height: 260px;
+  justify-content: center;
+  bottom: -2px;
+  right: 0;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  z-index: 1000;
+  margin: 10px;
+  background-color: rgba(0, 0, 0, 0.852);
+  color: white;
+  border-radius: 10px;
+}
+
+.alerting button {
+  padding: 4px;
+  /* margin-top: 0px; */
+  margin-bottom: 10px;
+  background-color: white;
+  margin-left: 190px;
+}
+
+.alerting img {
+  margin-bottom: 20px;
+  width: 100%;
+  height: 100px;
+}
+
+.alerting h5 {
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+.alerting * {
+  font-size: 15px;
+}
+
+.alerting:hover {
+  outline: 1px solid white;
+  outline-offset: 3px;
+}
+
+footer a {
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+footer a:hover {
+  color: rgba(255, 255, 255, 0.427) !important;
+  transform: scale(1.1) !important;
+}
+
+.section-form-heading {
+  margin: 100px auto;
+}
+
+.address div {
+  margin-bottom: 20px;
+}
+
+.contact {
+  background-image: url(../images/astro-bot-rescue-mission-wallpaper-06-en-us-06jul20.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.contact-container a {
+  padding: 10px;
+}
+
+.contact-container a i {
+  font-size: 20px;
+  padding: 5px;
+}
+
+.address h5 {
+  color: #e91e63;
+  font-weight: bold;
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.input-container input,
+.input-container textarea {
+  width: 100%;
+  padding: 5px 0;
+  font-size: 16px;
+  margin: 10px 0;
+  border: none;
+  border-bottom: 2px solid #333;
+  outline: none;
+  resize: none;
+}
+
+.input-container span {
+  position: absolute;
+  left: 0;
+  padding: 5px 0;
+  font-size: 16px;
+  margin: 5px 0;
+  bottom: 25px;
+  pointer-events: none;
+  transition: 0.5s;
+  color: #666;
+}
+
+.input-container *:focus ~ span {
+  color: #e91e63;
+  font-size: 12px;
+  transform: translateY(-20px);
+}
+
+.input-container textarea:focus ~ span {
+  transform: translateY(-40px);
+}
+.input-container button {
+  width: 100%;
+  background-color: #e91e63;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 17px;
+  transition: 0.5s;
+  border-radius: 10px;
+}
+
+.input-container button:hover {
+  background-color: #6d0d2d;
+  color: white;
+}
+
+.wrapper {
+  max-width: 1400px;
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
+  padding: 0 3px;
+}
+
+.wrapper i {
+  height: 50px;
+  width: 50px;
+  background: #fff;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 50%;
+  font-size: 1.25rem;
+  cursor: pointer;
+  position: absolute;
+  z-index: 999;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.wrapper i:first-child {
+  left: -22px;
+}
+
+.wrapper i:last-child {
+  right: -22px;
+}
+
+.wrapper .carousel2 {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% / 4) - 12px);
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: 0;
+  margin: 10px auto;
+  padding-left: 5px;
+  scroll-behavior: smooth;
+}
+
+.carousel2::-webkit-scrollbar {
+  display: none;
+}
+.carousel2.dragging {
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}
+
+.carousel2.dragging .card-li {
+  cursor: grab;
+  user-select: none;
+}
+.carousel2 .card-li {
+  scroll-snap-align: start;
+  height: 500px;
+  list-style: none;
+  border-radius: 8px;
+  box-shadow: 0 0 5px #999;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  margin: 10px auto;
+  position: relative;
+  transition: all 0.7s ease;
+}
+
+.card-li .img_container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.card-li .img_container img {
+  width: 95%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 0 20px #666;
+}
+
+@media screen and (max-width: 900px) {
+  .wrapper {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .wrapper .carousel2 {
+    grid-auto-columns: 100%;
+    width: 70%;
+  }
+
+  footer {
+    margin-top: 100px;
+  }
+}
+
+.cardback {
+  background-color: #666 !important;
+  position: absolute;
+  width: 90%;
+  height: 50%;
+  top: 120px;
+  padding: 10px;
+  display: flex !important;
+  flex-flow: column wrap;
+  justify-content: space-around;
+  align-items: center;
+  opacity: 0;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.7s ease;
+}
+
+.link-li {
+  text-decoration: none;
+  color: black;
+}
+
+.card-li:hover {
+  background-color: #aba8a8;
+}
+
+.card-li:hover .img_container img {
+  height: 340px;
+  transition: 0.7s ease;
+}
+
+.card-li:hover .cardback {
+  background-color: rgba(0, 0, 0, 0.637) !important;
+  opacity: 1 !important;
+}
+
+.card-li span {
+  display: block;
+  color: rgb(65, 149, 218);
+}
+
+.vr-container {
+  background: url(../images/psvr2-register-homepage-hero-desktop-01-en-14nov22.webp);
+  min-height: 90vh;
+  /* min-height: 100vh; */
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.vr-wrapper {
+  height: 300px;
+}
+
+.vr-wrapper a {
+  width: 150px;
+}
+
+@media screen and (max-width: 650px) {
+  .vr-wrapper {
+    text-align: center;
+    align-items: center;
+    display: flex;
+    padding: 0 !important;
+
+    width: 100% !important;
+  }
+
+  .vr-wrapper p {
+    width: 90vw !important;
+    text-wrap: wrap;
+  }
+}
+
+.form-select {
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.wrapper-img {
+  margin: 0 auto;
+  border-radius: 20px;
+}
+
+.wrapper-img img {
+  width: 100%;
+  height: 60vh;
+  border-radius: 20px;
+}
+
+.width-content {
+  margin-bottom: 20px;
+}
+.information-wrapper {
+  margin: 10px 0;
+}
+
+.heading-selects {
+  background-color: #666;
+  padding: 20px 0;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 910px) {
+  .select-wrapper select {
+    width: 90%;
+  }
+}
+
+.information-wrapper span {
+  display: block;
+  font-size: 17px;
+  color: rgba(0, 102, 255, 0.881);
+}
+
+.information-wrapper {
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding-top: 28px;
+  padding-left: 10px;
+  border-radius: 10px;
+}
+.summary {
+  box-shadow: 0 0 3px #666;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.row-games {
+  margin-top: 10px;
+  background-color: black;
+  padding: 30px;
+  width: 100%;
+}
+
+.col-game img {
+  box-shadow: 0 0 10px #999;
+}
+
+.body-game {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-game {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+.card-game a {
+  width: 100px;
+}
+
+.card-game {
+  transform: scale(0.9);
+}
+
+.card-game:hover {
+  transform: scale(1);
+  background-color: black;
+  color: white;
+  box-shadow: 0 0 5px white;
+}
+
+.card-game:hover a {
+  color: white;
+}
+
+.alert_section {
+  width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.body_profile {
+  background-color: #666;
+  background: url("../images/back.jpg");
+  background-size: cover;
+}
+.user-container {
+  height: 500px;
+  margin: 50px 0;
+  margin-bottom: 65px;
+  padding-left: 20px;
+}
+
+.user-container .container {
+  height: 400px;
+  display: flex;
+  align-items: center;
+}
+
+.input-containers {
+  height: 500px;
+}
+
+.user-container .container .col {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  height: 150px;
+  background-color: #333333;
+  margin-top: 40px;
+}
+
+.inputs {
+  display: flex;
+  align-items: center;
+}
+
+.inputs img {
+  width: 40px;
+  height: 50px;
+  border-radius: 5px;
+  margin-right: 10px;
+  background-color: transparent;
+}
+
+.inputs input {
+  padding: 5px;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #333;
+  color: white;
+}
+
+.inputs textarea {
+  border: none;
+  width: 200px;
+  background-color: transparent;
+  border-bottom: 1px solid #333333;
+  color: white;
+}
+
+.inputs input::placeholder {
+  color: whitesmoke;
+}
+
+.inputs textarea::placeholder {
+  color: whitesmoke;
+}
+
+.date {
+  width: 200px;
+}
+
+.inputs *:focus {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #333333;
+}
+
+.input-containers button {
+  width: 80px;
+}
