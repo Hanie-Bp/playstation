@@ -142,10 +142,7 @@ body {
 
 #navbarSupportedContent a:hover {
   border-radius: 10px;
-  /* border-bottom: 1px solid rgb(97, 125, 250); */
   box-shadow: 0 0 3px rgb(97, 125, 250);
-  /* outline: 1px solid rgb(97, 125, 250);  */
-  /* background-color:  rgba(97, 125, 250, 0.253); */
 }
 
 .width_1 {
@@ -154,6 +151,11 @@ body {
 
 .z-index {
   z-index: 999;
+}
+
+.back-white {
+  background-color: white !important;
+  color: black !important;
 }
 
 .pills button {
@@ -713,7 +715,7 @@ footer a:hover {
 
 .body_profile {
   background-color: #666;
-  background: url('../images/back.jpg');
+  background: url("../images/back.jpg");
   background-size: cover;
 }
 .user-container {
@@ -770,7 +772,6 @@ footer a:hover {
   border-bottom: 1px solid #333333;
   color: white;
 }
-
 
 .inputs input::placeholder {
   color: whitesmoke;

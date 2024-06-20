@@ -46,7 +46,7 @@ class LocalStorageData {
     localStorage.removeItem("user");
   }
 }
-const profile = selectedElement('.newitems')
+const profile = selectedElement(".newitems");
 const signInButtonContainer = document.querySelector(".sign-in");
 const checkUser = async () => {
   try {
@@ -61,29 +61,20 @@ const checkUser = async () => {
         //
       } else {
         const user = await res.json();
-        console.log(user);
-        const buttonUser = createElement('a',['user_profile']);
-        buttonUser.innerHTML= `<i class="bi bi-person-circle"></i>`;
-        buttonUser.addEventListener('click',()=> {
+        // console.log(user);
+        const buttonUser = createElement("a", ["user_profile"]);
+        buttonUser.innerHTML = `<i class="bi bi-person-circle"></i>`;
+        buttonUser.addEventListener("click", () => {
           window.location.href = `./pages/userprofile.html`;
-        })
+        });
         signInButtonContainer.innerHTML = "";
         signInButtonContainer.innerHTML =
           '<a href="./index.html" class="btn btn-primary btn-w">Log out</a>';
         signInButtonContainer.children[0].style.background = "darkblue";
-        profile.append(buttonUser)
+        profile.append(buttonUser);
         signInButtonContainer.addEventListener("click", () => {
           LocalStorageData.removeData();
         });
-        // const buttonUser = createElement('a',['user_profile']);
-        // buttonUser.innerHTML= `<i class="bi bi-person-circle"></i>`;
-        // buttonUser.addEventListener('click',()=> {
-        //   localStorage.setItem('user',user.email)
-        //   window.location.href = `./pages/userprofile.html`;
-        // })
-        // // buttonUser.href = './pages/userprofile.html';
-        // // localStorage.setItem('user',user._id)
-        // signInButtonContainer.append(buttonUser)
       }
     } else {
       const toAlert = createElement("section", ["alerting"]);
@@ -254,7 +245,23 @@ const create = async (games) => {
     cardContainer.append(card);
   }
 };
-const handledays = async () => {
+
+const buttonsTabs = document.querySelectorAll(".pills button");
+const handledays = async (e) => {
+  try {
+    cardContainer.innerHTML = "";
+    const games = await getRandomGames();
+    e.target.classList.add('back-white');
+    buttonsTabs[1].classList.remove('back-white');
+    buttonsTabs[2].classList.remove('back-white');
+    // console.log(games);
+    create(games);
+  } catch (error) {
+    alert(error);
+  }
+};
+
+const handledays2 = async () => {
   try {
     cardContainer.innerHTML = "";
     const games = await getRandomGames();
@@ -265,36 +272,49 @@ const handledays = async () => {
   }
 };
 
-const hadleNewReleases = async () => {
+const hadleNewReleases = async (e) => {
   try {
     cardContainer.innerHTML = "";
     const games = await getNewReleases();
-    console.log(games);
+    e.target.classList.add('back-white');
+    buttonsTabs[0].classList.remove('back-white');
+    buttonsTabs[2].classList.remove('back-white');
+    // console.log(games);
     create(games);
   } catch (error) {
     alert(error);
   }
 };
 
-const handleComingSoon = async () => {
+const handleComingSoon = async (e) => {
   try {
     cardContainer.innerHTML = "";
     const games = await getComingSoonGames();
-    console.log(games);
+    e.target.classList.add('back-white');
+    buttonsTabs[0].classList.remove('back-white');
+    buttonsTabs[1].classList.remove('back-white');
+    // console.log(games);
     create(games);
   } catch (error) {
     alert(error);
   }
 };
 
-const buttonsTabs = document.querySelectorAll(".pills button");
+
 buttonsTabs.forEach((button) => {
   if (button.classList.contains("days")) {
     button.addEventListener("click", handledays);
+    button.classList.add('back-white');
   } else if (button.classList.contains("new")) {
     button.addEventListener("click", hadleNewReleases);
+    // button.classList.add('back-white');
+    // buttonsTabs[0].classList.remove('back-white');
+    // buttonsTabs[2].classList.remove('back-white');
   } else {
     button.addEventListener("click", handleComingSoon);
+    // button.classList.add('back-white');
+    // buttonsTabs[0].classList.remove('back-white');
+    // buttonsTabs[1].classList.remove('back-white');
   }
 });
 
@@ -314,7 +334,7 @@ const getNewReleases = async () => {
   try {
     const response = await axios.request(options);
     const randomGames = response.data.slice(20, 28);
-    console.log(randomGames);
+    // console.log(randomGames);
     return randomGames;
   } catch (error) {
     console.error("Error fetching random games:", error);
@@ -326,7 +346,7 @@ const getRandomGames = async () => {
   try {
     const response = await axios.request(options);
     const randomGames = response.data.slice(12, 20);
-    console.log(randomGames);
+    // console.log(randomGames);
     return randomGames;
   } catch (error) {
     console.error("Error fetching random games:", error);
@@ -336,7 +356,7 @@ const getRandomGames = async () => {
 
 // getRandomGames();
 
-handledays();
+handledays2();
 
 ///////////////////////////
 
