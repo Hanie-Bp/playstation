@@ -22,10 +22,10 @@ const checkUser = async () => {
       );
 
       if (res.status !== 200) {
-        window.location.replace("/pages/signin.html");
+        window.location.replace("./signin.html");
       }
     } else {
-      window.location.replace("/pages/signin.html");
+      window.location.replace("./signin.html");
     }
   } catch (error) {
     console.log(error);
