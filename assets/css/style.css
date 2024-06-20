@@ -279,13 +279,24 @@ body {
   }
 }
 #body {
-  height: 100vh;
+  /* min-height: 100vh; */
+  overflow: hidden;
   background-color: blue;
   background-image: url(../images/wp6256889-vintage-aesthetic-ps4-wallpapers.jpg);
   background-position: unset;
   background-size: cover;
   background-repeat: no-repeat;
   background-blend-mode: multiply;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 770px) {
+  #body {
+    overflow: auto;
+    padding: 20px 0;
+  }
 }
 
 .alerting {
