@@ -190,6 +190,7 @@ body {
   width: 1000px;
   margin: 0 auto;
   gap: 3px;
+  row-gap: 12px;
   justify-content: space-around;
   margin-top: 30px;
 }
