@@ -174,6 +174,7 @@ async function getUpcomingGamesWithDetails() {
   const games = await getData();
   if (games) {
     let i = 0;
+    let b =0
     for (const game of games) {
       const index = games.indexOf(game);
       const gameDetails = game;
@@ -205,7 +206,7 @@ async function getUpcomingGamesWithDetails() {
       carouselConttainer.append(link);
 
       const buttonIndicator = createElement("button");
-      buttonIndicator.innerHTML = `<img src=${gameDetails.thumbnail} class='height-img-hero'>`;
+      buttonIndicator.innerHTML = `<img src=${images[++]} class='height-img-hero'>`;
       buttonIndicator.type = "button";
       buttonIndicator.style.border = "none";
       buttonIndicator.style.background = "none";
