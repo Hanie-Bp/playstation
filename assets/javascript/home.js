@@ -205,6 +205,7 @@ async function getUpcomingGamesWithDetails() {
       link.append(carouselItem);
       carouselConttainer.append(link);
 
+      
       const buttonIndicator = createElement("button");
       buttonIndicator.innerHTML = `<img src=${images[b++]} class='height-img-hero'>`;
       buttonIndicator.type = "button";
