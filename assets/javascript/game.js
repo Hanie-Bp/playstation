@@ -15,6 +15,64 @@ const selectedElement = (query) => {
   return element;
 };
 
+// Custom Error Notification System
+const showErrorNotification = (error, title = "Network Error") => {
+  // Remove any existing notifications
+  const existingNotifications = document.querySelectorAll(".error-notification");
+  existingNotifications.forEach((notif) => notif.remove());
+
+  let errorMessage = "An error occurred. Please try again.";
+  
+  if (error) {
+    if (error.response) {
+      // Axios error with response
+      errorMessage = error.response.data?.message || 
+                     error.response.statusText || 
+                     `Server error: ${error.response.status}`;
+    } else if (error.request) {
+      // Axios error without response (network error)
+      errorMessage = "Network error. Please check your internet connection or VPN.";
+    } else if (error.message) {
+      // Error object with message
+      errorMessage = error.message;
+    } else if (typeof error === "string") {
+      // String error
+      errorMessage = error;
+    }
+  }
+
+  const notification = createElement("div", ["error-notification"]);
+  notification.innerHTML = `
+    <div class="error-notification__icon">
+      <i class="bi bi-exclamation-triangle-fill"></i>
+    </div>
+    <div class="error-notification__content">
+      <div class="error-notification__title">${title}</div>
+      <p class="error-notification__message">${errorMessage}</p>
+    </div>
+    <button class="error-notification__close" aria-label="Close">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  `;
+
+  const closeBtn = notification.querySelector(".error-notification__close");
+  const handleClose = () => {
+    notification.classList.add("error-notification--hide");
+    setTimeout(() => notification.remove(), 300);
+  };
+
+  closeBtn.addEventListener("click", handleClose);
+
+  document.body.appendChild(notification);
+
+  // Auto-dismiss after 5 seconds
+  setTimeout(() => {
+    if (document.body.contains(notification)) {
+      handleClose();
+    }
+  }, 5000);
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.querySelector("#search");
   const searchIcon = document.querySelector(".search-icon");
@@ -116,6 +174,8 @@ async function fetchGameDetails(gameId) {
     return response.data;
   } catch (error) {
     console.error(error);
+    showErrorNotification(error, "Failed to Load Game Details");
+    return null;
   }
 }
 
@@ -154,6 +214,8 @@ const getGames = async () => {
     return response.data;
   } catch (error) {
     console.error(error);
+    showErrorNotification(error, "Failed to Load Games");
+    return [];
   }
 };
 
@@ -191,7 +253,7 @@ formSelect1.addEventListener("change", async (e) => {
     });
     return response;
   } catch (error) {
-    alert(error);
+    showErrorNotification(error, "Failed to Load Games");
   }
 });
 

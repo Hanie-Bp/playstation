@@ -15,9 +15,109 @@ const selectedElement = (query) => {
   return element;
 };
 
+// Custom Error Notification System
+const showErrorNotification = (error, title = "Network Error") => {
+  // Remove any existing notifications
+  const existingNotifications = document.querySelectorAll(
+    ".error-notification"
+  );
+  existingNotifications.forEach((notif) => notif.remove());
+
+  let errorMessage = "An error occurred. Please try again.";
+
+  if (error) {
+    if (error.response) {
+      // Axios error with response
+      errorMessage =
+        error.response.data?.message ||
+        error.response.statusText ||
+        `Server error: ${error.response.status}`;
+    } else if (error.request) {
+      // Axios error without response (network error)
+      errorMessage =
+        "Network error. Please check your internet connection or VPN. You can try it with VPN";
+    } else if (error.message) {
+      // Error object with message
+      errorMessage = error.message;
+    } else if (typeof error === "string") {
+      // String error
+      errorMessage = error;
+    }
+  }
+
+  const notification = createElement("div", ["error-notification"]);
+  notification.innerHTML = `
+    <div class="error-notification__icon">
+      <i class="bi bi-exclamation-triangle-fill"></i>
+    </div>
+    <div class="error-notification__content">
+      <div class="error-notification__title">${title}</div>
+      <p class="error-notification__message">${errorMessage}</p>
+    </div>
+    <button class="error-notification__close" aria-label="Close">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  `;
+
+  const closeBtn = notification.querySelector(".error-notification__close");
+  const handleClose = () => {
+    notification.classList.add("error-notification--hide");
+    setTimeout(() => notification.remove(), 300);
+  };
+
+  closeBtn.addEventListener("click", handleClose);
+
+  document.body.appendChild(notification);
+
+  // Auto-dismiss after 5 seconds
+  setTimeout(() => {
+    if (document.body.contains(notification)) {
+      handleClose();
+    }
+  }, 5000);
+};
+
+const VPN_NOTICE_KEY = "vpnEnabled";
+
+const renderVpnNotice = () => {
+  const vpnAcknowledged = localStorage.getItem(VPN_NOTICE_KEY) === "true";
+  if (vpnAcknowledged) return;
+
+  const notice = createElement("div", ["vpn-notice", "shadow"]);
+  notice.innerHTML = `
+    <div class="vpn-notice__text">
+      For full website content, please turn on your VPN.
+    </div>
+    <div class="vpn-notice__actions">
+      <button class="btn btn-light btn-sm" data-action="vpn-on">VPN is on</button>
+      <button class="btn btn-outline-light btn-sm" data-action="vpn-dismiss">Dismiss</button>
+    </div>
+  `;
+
+  const handleHide = () => {
+    notice.classList.add("vpn-notice--hide");
+    setTimeout(() => notice.remove(), 250);
+  };
+
+  notice
+    .querySelector("[data-action='vpn-on']")
+    .addEventListener("click", () => {
+      localStorage.setItem(VPN_NOTICE_KEY, "true");
+      handleHide();
+    });
+
+  notice
+    .querySelector("[data-action='vpn-dismiss']")
+    .addEventListener("click", handleHide);
+
+  document.body.prepend(notice);
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.querySelector("#search");
   const searchIcon = document.querySelector(".search-icon");
+
+  renderVpnNotice();
 
   searchIcon.addEventListener("click", () => {
     console.log("hey");
@@ -126,6 +226,7 @@ const getData = async () => {
     return tenNewestGames;
   } catch (error) {
     console.error("Error fetching games:", error);
+    showErrorNotification(error, "Failed to Load Games");
     return [];
   }
 };
@@ -153,6 +254,7 @@ const fetchGameDetailsById = async (gameId) => {
     return response.data;
   } catch (error) {
     console.error(`Error fetching game details for ID ${gameId}:`, error);
+    showErrorNotification(error, "Failed to Load Game Details");
     return null;
   }
 };
@@ -174,7 +276,7 @@ async function getUpcomingGamesWithDetails() {
   const games = await getData();
   if (games) {
     let i = 0;
-    let b =0
+    let b = 0;
     for (const game of games) {
       const index = games.indexOf(game);
       const gameDetails = game;
@@ -205,9 +307,10 @@ async function getUpcomingGamesWithDetails() {
       link.append(carouselItem);
       carouselConttainer.append(link);
 
-      
       const buttonIndicator = createElement("button");
-      buttonIndicator.innerHTML = `<img src=${images[b++]} class='height-img-hero'>`;
+      buttonIndicator.innerHTML = `<img src=${
+        images[b++]
+      } class='height-img-hero'>`;
       buttonIndicator.type = "button";
       buttonIndicator.style.border = "none";
       buttonIndicator.style.background = "none";
@@ -253,13 +356,13 @@ const handledays = async (e) => {
   try {
     cardContainer.innerHTML = "";
     const games = await getRandomGames();
-    e.target.classList.add('back-white');
-    buttonsTabs[1].classList.remove('back-white');
-    buttonsTabs[2].classList.remove('back-white');
+    e.target.classList.add("back-white");
+    buttonsTabs[1].classList.remove("back-white");
+    buttonsTabs[2].classList.remove("back-white");
     // console.log(games);
     create(games);
   } catch (error) {
-    alert(error);
+    showErrorNotification(error, "Failed to Load Games");
   }
 };
 
@@ -270,7 +373,7 @@ const handledays2 = async () => {
     // console.log(games);
     create(games);
   } catch (error) {
-    alert(error);
+    showErrorNotification(error, "Failed to Load Games");
   }
 };
 
@@ -278,13 +381,13 @@ const hadleNewReleases = async (e) => {
   try {
     cardContainer.innerHTML = "";
     const games = await getNewReleases();
-    e.target.classList.add('back-white');
-    buttonsTabs[0].classList.remove('back-white');
-    buttonsTabs[2].classList.remove('back-white');
+    e.target.classList.add("back-white");
+    buttonsTabs[0].classList.remove("back-white");
+    buttonsTabs[2].classList.remove("back-white");
     // console.log(games);
     create(games);
   } catch (error) {
-    alert(error);
+    showErrorNotification(error, "Failed to Load New Releases");
   }
 };
 
@@ -292,21 +395,20 @@ const handleComingSoon = async (e) => {
   try {
     cardContainer.innerHTML = "";
     const games = await getComingSoonGames();
-    e.target.classList.add('back-white');
-    buttonsTabs[0].classList.remove('back-white');
-    buttonsTabs[1].classList.remove('back-white');
+    e.target.classList.add("back-white");
+    buttonsTabs[0].classList.remove("back-white");
+    buttonsTabs[1].classList.remove("back-white");
     // console.log(games);
     create(games);
   } catch (error) {
-    alert(error);
+    showErrorNotification(error, "Failed to Load Coming Soon Games");
   }
 };
-
 
 buttonsTabs.forEach((button) => {
   if (button.classList.contains("days")) {
     button.addEventListener("click", handledays);
-    button.classList.add('back-white');
+    button.classList.add("back-white");
   } else if (button.classList.contains("new")) {
     button.addEventListener("click", hadleNewReleases);
     // button.classList.add('back-white');
@@ -328,6 +430,7 @@ const getComingSoonGames = async () => {
     return randomGames;
   } catch (error) {
     console.error("Error fetching random games:", error);
+    showErrorNotification(error, "Failed to Load Coming Soon Games");
     return [];
   }
 };
@@ -340,6 +443,7 @@ const getNewReleases = async () => {
     return randomGames;
   } catch (error) {
     console.error("Error fetching random games:", error);
+    showErrorNotification(error, "Failed to Load New Releases");
     return [];
   }
 };
@@ -352,6 +456,7 @@ const getRandomGames = async () => {
     return randomGames;
   } catch (error) {
     console.error("Error fetching random games:", error);
+    showErrorNotification(error, "Failed to Load Games");
     return [];
   }
 };
@@ -421,7 +526,8 @@ async function fetchGames() {
     const games = response.data.slice(10, 20);
     return games;
   } catch (error) {
-    alert(error);
+    showErrorNotification(error, "Failed to Fetch Games");
+    return [];
   }
 }
 fetchGames();
@@ -447,7 +553,8 @@ const fetchDeatails = async (id) => {
     );
     return data;
   } catch (error) {
-    alert(error);
+    showErrorNotification(error, "Failed to Load Game Details");
+    return null;
   }
 };
 

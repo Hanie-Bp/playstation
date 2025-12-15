@@ -806,3 +806,134 @@ footer a:hover {
 .input-containers button {
   width: 80px;
 }
+
+.vpn-notice {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1100;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(90deg, #0a3c8c, #1b75d0);
+  color: #fff;
+}
+
+.vpn-notice__text {
+  font-weight: 600;
+}
+
+.vpn-notice__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.vpn-notice--hide {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Custom Error Notification */
+.error-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1200;
+  min-width: 300px;
+  max-width: 500px;
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  color: #fff;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  animation: slideInRight 0.3s ease-out;
+  font-size: 0.95rem;
+}
+
+.error-notification--hide {
+  animation: slideOutRight 0.3s ease-in forwards;
+}
+
+.error-notification__icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.error-notification__content {
+  flex: 1;
+}
+
+.error-notification__title {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  font-size: 1rem;
+}
+
+.error-notification__message {
+  margin: 0;
+  opacity: 0.95;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.error-notification__close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+
+.error-notification__close:hover {
+  opacity: 1;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .error-notification {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    min-width: auto;
+    max-width: none;
+  }
+}
